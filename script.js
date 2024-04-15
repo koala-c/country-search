@@ -1,6 +1,7 @@
 const countryInput = document.getElementById('countryInput');
 const suggestions = document.getElementById('suggestions');
 let selectedSuggestionIndex = -1; // Initialize selected suggestion index
+const OPENWEATHERMAP_API_KEY = process.env.OPENWEATHERMAP_API_KEY;
 
 countryInput.addEventListener('input', function() {
     const searchTerm = this.value.trim();
@@ -131,7 +132,7 @@ function searchCountry(countryName) {
                 <p>Prefix: ${country.idd.root}${country.idd.suffixes[0]}</p>
             `;
 
-            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&appid=8f76ae67c4cadbb8a7ef76a32e844865&units=metric`)
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&appid=${OPENWEATHERMAP_API_KEY}&units=metric`)
                 .then(response => response.json())
                 .then(weatherData => {
                     const weatherInfo = document.getElementById('weatherInfo');
